@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Heart,
@@ -6,6 +8,12 @@ import {
   Shield,
   Sparkles,
   ArrowRight,
+  Download,
+  Menu,
+  X,
+  Home as HomeIcon,
+  Search,
+  User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,12 +23,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import InstallPrompt from "@/components/install-prompt";
+import MobileInstallPrompt from "@/components/mobile-install-prompt";
 import PushNotificationManager from "@/components/push-notifications";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-16 md:pb-0">
+      {/* Mobile Install Prompt - Shows on mobile devices */}
+      <MobileInstallPrompt />
+
       {/* Navigation */}
       <nav className="container mx-auto px-4 py-6 flex justify-between items-center">
         <div className="flex items-center space-x-2">
@@ -28,11 +39,43 @@ export default function Home() {
           <span className="text-2xl font-bold text-gray-900">DatingApp</span>
         </div>
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" asChild>
+          {/* Mobile Install Button */}
+          <div className="md:hidden">
+            <Button
+              size="sm"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  const isIOS =
+                    /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+                    !(window as any).MSStream;
+                  if (isIOS) {
+                    alert(
+                      'To install: Tap share button → "Add to Home Screen" → "Add"',
+                    );
+                  } else {
+                    alert(
+                      "Look for the install icon in your browser's address bar or menu",
+                    );
+                  }
+                }
+              }}
+              className="bg-pink-500 hover:bg-pink-600 text-white text-xs px-3 py-2"
+            >
+              <Download className="h-4 w-4 mr-1" />
+              Install
+            </Button>
+          </div>
+
+          <Button variant="ghost" asChild className="hidden md:inline-flex">
             <Link href="/login">Log In</Link>
           </Button>
-          <Button asChild>
+          <Button asChild className="hidden md:inline-flex">
             <Link href="/signup">Sign Up</Link>
+          </Button>
+
+          {/* Mobile Menu */}
+          <Button variant="ghost" size="sm" className="md:hidden">
+            <Menu className="h-5 w-5" />
           </Button>
         </div>
       </nav>
@@ -71,7 +114,6 @@ export default function Home() {
       {/* PWA Features Section */}
       <section className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto space-y-6">
-          <InstallPrompt />
           <PushNotificationManager />
         </div>
       </section>
@@ -250,6 +292,67 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Mobile Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
+        <div className="flex items-center justify-around py-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center gap-1 text-xs"
+          >
+            <HomeIcon className="h-5 w-5" />
+            <span>Home</span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center gap-1 text-xs"
+          >
+            <Search className="h-5 w-5" />
+            <span>Discover</span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center gap-1 text-xs"
+          >
+            <MessageCircle className="h-5 w-5" />
+            <span>Chat</span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center gap-1 text-xs"
+          >
+            <User className="h-5 w-5" />
+            <span>Profile</span>
+          </Button>
+          <Button
+            size="sm"
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                const isIOS =
+                  /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+                  !(window as any).MSStream;
+                if (isIOS) {
+                  alert(
+                    'To install: Tap share button → "Add to Home Screen" → "Add"',
+                  );
+                } else {
+                  alert(
+                    "Look for the install icon in your browser's address bar or menu",
+                  );
+                }
+              }
+            }}
+            className="flex flex-col items-center gap-1 text-xs bg-pink-500 hover:bg-pink-600 text-white"
+          >
+            <Download className="h-5 w-5" />
+            <span>Install</span>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" fill="none">
+  <rect width="192" height="192" rx="48" fill="#ec4899"/>
+  <path d="M96 48C72 48 48 72 48 96C48 120 72 144 96 144C120 144 144 120 144 96C144 72 120 48 96 48Z" fill="white"/>
+  <path d="M96 64C78.4 64 64 78.4 64 96C64 113.6 78.4 128 96 128C113.6 128 128 113.6 128 96C128 78.4 113.6 64 96 64Z" fill="#ec4899"/>
+  <path d="M84 84L108 84L108 108L84 108Z" fill="white"/>
+  <path d="M84 88L108 88L108 92L84 92Z" fill="#ec4899"/>
+  <path d="M84 96L108 96L108 100L84 100Z" fill="#ec4899"/>
+  <path d="M84 104L108 104L108 108L84 108Z" fill="#ec4899"/>
+</svg>
+```
+
+Now let me create a proper manifest that uses the SVG icon and add a service worker registration:

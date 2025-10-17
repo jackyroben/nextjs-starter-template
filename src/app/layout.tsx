@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ServiceWorkerRegistration from "@/components/service-worker-registration";
+import MobileInstallPrompt from "@/components/mobile-install-prompt";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,10 +27,6 @@ export const metadata: Metadata = {
     description:
       "Connect with amazing people in your area. Swipe, match, and start meaningful conversations.",
   },
-  robots: {
-    index: false,
-    follow: false,
-  },
   manifest: "/manifest",
   other: {
     "mobile-web-app-capable": "yes",
@@ -49,11 +47,22 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#ec4899" />
-        <link rel="apple-touch-icon" href="/icons/icon-152x152.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Dating App" />
+        <meta name="application-name" content="Dating App" />
+        <meta name="msapplication-TileColor" content="#ec4899" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+        />
+        <link rel="apple-touch-icon" href="/icon.svg" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${inter.className} font-sans antialiased`}>
         {children}
+        <ServiceWorkerRegistration />
+        <MobileInstallPrompt />
       </body>
     </html>
   );

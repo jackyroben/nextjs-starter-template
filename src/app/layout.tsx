@@ -4,7 +4,6 @@ import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -30,6 +29,15 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
+  manifest: "/manifest",
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "Dating App",
+    "application-name": "Dating App",
+    "msapplication-TileColor": "#ec4899",
+  },
 };
 
 export default function RootLayout({
@@ -39,7 +47,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <head>
+        <meta name="theme-color" content="#ec4899" />
+        <link rel="apple-touch-icon" href="/icons/icon-152x152.png" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body className={`${inter.className} font-sans antialiased`}>
         {children}
       </body>
     </html>

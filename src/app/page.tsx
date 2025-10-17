@@ -15,6 +15,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import InstallPrompt from "@/components/install-prompt";
+import PushNotificationManager from "@/components/push-notifications";
 
 export default function Home() {
   return (
@@ -63,6 +65,14 @@ export default function Home() {
               <Link href="/demo">Try Demo</Link>
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* PWA Features Section */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <InstallPrompt />
+          <PushNotificationManager />
         </div>
       </section>
 
